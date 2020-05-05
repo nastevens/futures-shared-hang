@@ -1,7 +1,7 @@
 use futures::future::{self, FutureExt};
 use hyper::{Client, Uri};
 
-#[actix_rt::main]
+#[tokio::main]
 async fn main() {
     let n = std::env::args().nth(1).map(|s| s.parse::<usize>().unwrap()).unwrap_or(100);
     println!("Running with {} futures", n);
