@@ -1,0 +1,15 @@
+[package]
+name = "recreate_tokio_fs_hang"
+version = "0.1.0"
+authors = ["Nick Stevens <nick.stevens@smartthings.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix = "0.10.0-alpha.2"
+actix-rt = "1.1"
+env_logger = "0.7"
+futures = "0.3"
+hyper = "0.13"
+tokio = { version = "0.2", features = ["blocking", "fs", "macros"] }
