@@ -3,7 +3,6 @@ use futures::stream::{StreamExt, FuturesUnordered};
 use std::fs;
 
 fn main() {
-    env_logger::init();
     let n = std::env::args().nth(1).map(|s| s.parse::<usize>().unwrap()).unwrap_or(100);
     println!("Running with {} futures", n);
     let mut rt = tokio::runtime::Builder::new()

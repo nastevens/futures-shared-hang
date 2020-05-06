@@ -7,7 +7,5 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-env_logger = "0.7"
 futures = "0.3"
-hyper = "0.13"
 tokio = { version = "0.2", features = ["blocking", "fs", "macros", "rt-threaded"] }
