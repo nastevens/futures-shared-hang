@@ -10,4 +10,4 @@ edition = "2018"
 env_logger = "0.7"
 futures = "0.3"
 hyper = "0.13"
-tokio = { version = "0.2", features = ["blocking", "fs", "macros"] }
+tokio = { version = "0.2", features = ["blocking", "fs", "macros", "rt-threaded"] }
