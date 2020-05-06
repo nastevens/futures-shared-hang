@@ -16,9 +16,7 @@ fn main() {
         for _ in 0..n {
             multiple.push(hang(n));
         }
-        while let Some(_) = multiple.next().await {
-            println!("Outer");
-        }
+        while let Some(_) = multiple.next().await {}
     });
 }
 
@@ -33,7 +31,5 @@ async fn hang(n: usize) {
         futures.push(fut.clone());
     }
     futures.push(fut);
-    while let Some(_) = futures.next().await {
-        println!("Inner");
-    }
+    while let Some(_) = futures.next().await {}
 }
