@@ -197,14 +197,15 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "0.2.20"
+version = "0.2.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "05c1d570eb1a36f0345a5ce9c6c6e665b70b73d11236912c0b477616aeec47b1"
+checksum = "2751672f9da075d045c67fdb0068be9850ab7b231fa77bb51d6fd35da9c0bb0d"
 dependencies = [
  "bytes",
  "memchr",
  "num_cpus",
  "pin-project-lite",
+ "slab",
  "tokio-macros",
 ]
 
