@@ -2,22 +2,15 @@ use futures::future::FutureExt;
 use futures::stream::{StreamExt, FuturesUnordered};
 use std::fs;
 
-fn main() {
+#[tokio::main]
+async fn main() {
     let n = std::env::args().nth(1).map(|s| s.parse::<usize>().unwrap()).unwrap_or(100);
     println!("Running with {} futures", n);
-    let mut rt = tokio::runtime::Builder::new()
-        .enable_all()
-        .threaded_scheduler()
-        .max_threads(64)
-        .build()
-        .unwrap();
-    rt.block_on(async move {
-        let mut multiple = FuturesUnordered::new();
-        for _ in 0..n {
-            multiple.push(hang(n));
-        }
-        while let Some(_) = multiple.next().await {}
-    });
+    let mut multiple = FuturesUnordered::new();
+    for _ in 0..n {
+        multiple.push(hang(n));
+    }
+    while let Some(_) = multiple.next().await {}
 }
 
 async fn hang(n: usize) {
