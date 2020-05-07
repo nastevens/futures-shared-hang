@@ -1,28 +1,18 @@
 use futures::future::FutureExt;
 use futures::stream::{StreamExt, FuturesUnordered};
-use std::fs;
+use std::future::Future;
 
 #[tokio::main]
 async fn main() {
-    let n = std::env::args().nth(1).map(|s| s.parse::<usize>().unwrap()).unwrap_or(100);
+    let n = std::env::args().nth(1).map(|s| s.parse::<usize>().unwrap()).unwrap_or(1);
     println!("Running with {} futures", n);
     let mut multiple = FuturesUnordered::new();
     for _ in 0..n {
-        multiple.push(hang(n));
+        multiple.push(shared());
     }
     while let Some(_) = multiple.next().await {}
 }
 
-async fn hang(n: usize) {
-    let mut futures = FuturesUnordered::new();
-    let fut = async move { 
-        tokio::task::spawn_blocking(move || {
-            fs::read("test_file.bin").map(Vec::into_boxed_slice).unwrap()
-        }).await.unwrap()
-    }.shared();
-    for _ in 0..n {
-        futures.push(fut.clone());
-    }
-    futures.push(fut);
-    while let Some(_) = futures.next().await {}
+fn shared() -> impl Future<Output = ()> {
+    tokio::spawn(async {}).then(|_| async {}).shared()
 }

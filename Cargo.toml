@@ -8,4 +8,7 @@ edition = "2018"
 
 [dependencies]
 futures = "0.3"
-tokio = { version = "=0.2.14", features = ["blocking", "fs", "macros", "rt-threaded", "time"] }
+tokio = { version = "0.2", features = ["blocking", "fs", "macros", "rt-threaded", "rt-util", "time"] }
+
+[patch.crates-io]
+tokio = { path = "../tokio/tokio" }
